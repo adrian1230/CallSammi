@@ -15,7 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from understand.views import error404, error500
+from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.generic import TemplateView
+from django.conf.urls import handler404, handler500
+from understand.views import register, login
+from understand.views import Submit, Data
+
+admin.site.site_header = "Sammi"
+admin.site.index_title = "Welcome to Sammi's Internal Portal"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('ahbjdkasjdk/Sammi/admin/uas9d', admin.site.urls),
+    path('',home, name='Home'),
+    path('Sammi/Submit/',Submit.as_view(),name="SSubmit"),
+    path('login/',login,name="Login"),
+    path('register/',register,name="RegisterS"),
+    path('Sammi/Result/',Data.as_view(),name="DataS")
 ]
+
+handler404 = 'understand.views.error404'
+handler500 = 'understand.views.error500'

@@ -1,0 +1,8 @@
+home page 
+login page yes
+register page yes
+data page - login required
+admin page - restrict for staff user 
+submit page yes
+404 page (page not found) yes
+500 page (internal server error) yes
