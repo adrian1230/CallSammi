@@ -1,0 +1,44 @@
+{% block content %}
+<div class="columns">
+  <div class="column is-mobile">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-4by3">
+          <img src="/static/images/fav.png" alt="Placeholder image">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-content">
+            <p class="title is-4">Summon Sammi</p>
+            <p class="subtitle is-6">Summarize long articles here!</p>
+          </div>
+        </div>
+
+        <div class="content">
+          Have you ever been frustrated when extracting the precise, profound, key valeus of an article.
+          Then, I am sure you can't waite for anymore.
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="field">
+        <form method="post">
+          {% csrf_token %}
+          <label class="label" for="username">Username:</label>
+          <div class="control">
+            <input type="text" name="username" class="input" placeholder="Username"><br>
+          </div>
+          <label class="label" for="password">Password:</label>
+          <div class="control">
+            <input type="password" name="password" class="input" placeholder="Password">
+          </div>
+          <br>
+          <input type="submit" value="Log In" class="button is-link"></input>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

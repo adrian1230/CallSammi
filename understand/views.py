@@ -7,13 +7,14 @@ from django import forms
 from django.views.generic.edit import FormView
 from django.contrib.auth.models import AnonymousUser
 from django.urls import reverse_lazy
+from django import forms
 from django.contrib.auth.decorators import user_passes_test
 from django.views.generic import CreateView
-from undestand.models import Result
+from understand.models import Result
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
-from understand.forms import Register, TextSummary
+from understand.forms import TextSummary, Register
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
@@ -33,7 +34,6 @@ from django.utils.crypto import constant_time_compare
 from django.utils.module_loading import import_string
 from django.http import JsonResponse
 from django.db.models import DEFERRED
-from rest_framework.views import APIVi
 from django.http import StreamingHttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.csrf import csrf_protect
@@ -89,9 +89,11 @@ def logout(request, *args, **kwargs):
     auth.logout(request)
     for key in request.session.keys():
         del request.session[key]
-    return redirect('Home')
+    return redirect('Login')
 
-class Submit(TemplateView):
+board_de = [login_required, never_cache]
+@method_decorator(board_de, name='dispatch')
+class Submit(LoginRequiredMixin,TemplateView):
 	template_name = "understand/submit.html"
 
 	def get(self, request):
@@ -114,6 +116,24 @@ class Submit(TemplateView):
 		args = {'form':form,'source':source,'original_text':original_text,
 		'category':category,'user':user}
 		return render(request, self.template_name, args)
+
+# def home(request, *args, **kwargs):
+# 	return render(request,'understand/home.html',{})
+
+board_de = [login_required, never_cache]
+@method_decorator(board_de, name='dispatch')
+class Data(LoginRequiredMixin,TemplateView):
+	login_url = 'Login'
+	redirect_field_name = 'DataS'
+
+	def get(self,request):
+		result = Result.objects.all().order_by('-date')
+
+		args = {
+		 'result': result
+		}
+		return render(request, 'understand/data.html',args)
+
 
 
 

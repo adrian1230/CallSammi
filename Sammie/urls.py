@@ -29,9 +29,8 @@ admin.site.index_title = "Welcome to Sammi's Internal Portal"
 
 urlpatterns = [
     path('ahbjdkasjdk/Sammi/admin/uas9d', admin.site.urls),
-    path('',home, name='Home'),
     path('Sammi/Submit/',Submit.as_view(),name="SSubmit"),
-    path('login/',login,name="Login"),
+    path('',login,name="Login"),
     path('register/',register,name="RegisterS"),
     path('Sammi/Result/',Data.as_view(),name="DataS")
 ]

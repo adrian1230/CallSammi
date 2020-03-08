@@ -1,0 +1,29 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800">
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link rel="icon" href="{% static 'images/fav.jpg'%}">
+    <title>{% block title %}Sammi{% endblock %}</title>
+</head>
+
+<body>
+    <div class="container">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a href="{% url 'Login' %}" class="navbar-item">
+            <img src="/static/images/fav.png" alt="fav">
+          </a>
+        </div>
+      </nav>
+      <div class="container">
+          {% block content %} Here you are {% endblock %}
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
 from django.contrib import admin
-from understand.models import result
+from understand.models import Result
 
-admin.site.register(result)
+admin.site.register(Result)
