@@ -1,44 +1,67 @@
 {% block content %}
-<div class="columns">
-  <div class="column is-mobile">
-    <div class="card">
-      <div class="card-image">
-        <figure class="image is-4by3">
-          <img src="/static/images/fav.png" alt="Placeholder image">
-        </figure>
+<div class="tile is-ancestor">
+  <div class="tile is-vertical is-8">
+    <div class="tile">
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child notification is-primary">
+          <p class="title">Sammie</p>
+          <p class="subtitle">Your favorite chore bulter</p>
+        </article>
+        <article class="tile is-child notification is-warning">
+          <p class="title">Be aware of its power</p>
+          <p class="subtitle">Use it well but don't spoil it</p>
+        </article>
       </div>
-      <div class="card-content">
-        <div class="media">
-          <div class="media-content">
-            <p class="title is-4">Summon Sammi</p>
-            <p class="subtitle is-6">Summarize long articles here!</p>
-          </div>
-        </div>
-
+      <div class="tile is-parent">
+        <article class="tile is-child notification is-info">
+          <p class="title">Sammie Summarized</p>
+          <p class="subtitle">First Prototype</p>
+          <figure class="image is-4by3">
+            <img src="../static/images/asd.png">
+          </figure>
+        </article>
+      </div>
+    </div>
+    <div class="tile is-parent">
+      <article class="tile is-child notification is-danger">
+        <p class="title">Contact US</p>
+        <p class="subtitle">We are your faithful assistant</p>
         <div class="content">
-          Have you ever been frustrated when extracting the precise, profound, key valeus of an article.
-          Then, I am sure you can't waite for anymore.
-          <br>
+          <a href="mailto: adrian1145d98@gmail.com" style="text-decoration: none;">
+            Adrian So. Creator of Sammie.
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child notification is-success">
+      <div class="content">
+        <p class="title">Come and Call</p>
+        <p class="subtitle">Login here:</p>
+        <div class="content">
+          <div class="field">
+            <form method="post">
+              {% csrf_token %}
+              <label class="label" for="username">Username:</label>
+              <div class="control">
+                <input type="text" name="username" class="input" placeholder="Username"><br>
+              </div>
+              <label class="label" for="password">Password:</label>
+              <div class="control">
+                <input type="password" name="password" class="input" placeholder="Password">
+              </div>
+              <br>
+              <input type="submit" value="Log In" class="button is-link"></input>
+            </form>
+          </div>
+          <h3>If you have not registered, then, what are you waiting for!</h3>
+          <h4>
+            <a href="{%url 'RegisterS' %}" style="text-decoration: none;">Come and level up your efficiency!</a>
+          </h4>
         </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="field">
-        <form method="post">
-          {% csrf_token %}
-          <label class="label" for="username">Username:</label>
-          <div class="control">
-            <input type="text" name="username" class="input" placeholder="Username"><br>
-          </div>
-          <label class="label" for="password">Password:</label>
-          <div class="control">
-            <input type="password" name="password" class="input" placeholder="Password">
-          </div>
-          <br>
-          <input type="submit" value="Log In" class="button is-link"></input>
-        </form>
-      </div>
-    </div>
+    </article>
   </div>
 </div>
 {% endblock %}

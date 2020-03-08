@@ -1,0 +1,14 @@
+{%block content%}
+<div class="field">
+  <form method="post">
+    {% csrf_token %}
+    <div class="control">
+      {{ form.as_p }}
+    </div>
+    <br>
+    <a href="{%url 'SSubmit' %}">
+      <input type="submit" value="Summarize" class="button is-primary"></input>
+    </a>
+  </form>
+</div>
+{%endblock%}

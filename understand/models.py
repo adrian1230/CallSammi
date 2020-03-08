@@ -13,9 +13,9 @@ categories = (
 )
 
 class Result(models.Model):
-	source = models.CharField(max_length=100)
+	source = models.CharField(max_length=100, null=True, blank=True)
 	original_text = models.TextField()
-	summarized_text = models.CharField(max_length=10000)
-	category = models.CharField(max_length=70, choices=categories, default="NA", null=True, blank=True)
-	user = models.CharField(max_length=100, null=True, blank=True)
+	summarized_text = models.TextField(null=True, blank=True)
+	category = models.CharField(max_length=70, choices=categories)
+	user = models.CharField(max_length=100,null=True,blank=True)
 	date = models.DateTimeField(auto_now_add=True)

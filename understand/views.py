@@ -6,6 +6,7 @@ from django.http import Http404
 from django import forms
 from django.views.generic.edit import FormView
 from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.models import User, Group
 from django.urls import reverse_lazy
 from django import forms
 from django.contrib.auth.decorators import user_passes_test
@@ -43,6 +44,13 @@ from django.template import RequestContext, Context
 from django.http import HttpResponse, HttpResponseNotFound
 from django.http import HttpResponseServerError
 
+users = User.objects.values_list('username')
+
+user = []
+
+for i in range(len(users)):
+    user.append(users[i][0])
+
 def error404(request, exception, template_name="understand/404.html"):
     response = render(request, 'understand/404.html', {})
     response.status_code = 404
@@ -66,7 +74,7 @@ def register(request, *args, **kwargs):
 
     return render(request, 'understand/register.html', context={'form': form})
 
-def login(request):
+def loginn(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -74,7 +82,7 @@ def login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return redirect('DataS')
+                return redirect('SSubmit')
             else:
                 return HttpResponse("Your account was inactive.")
         else:
@@ -112,7 +120,7 @@ class Submit(LoginRequiredMixin,TemplateView):
 			category = form.cleaned_data['category']
 			user = form.cleaned_data['user']
 			form.save()
-			return redirect('DataS')
+			return redirect('SSubmit')
 		args = {'form':form,'source':source,'original_text':original_text,
 		'category':category,'user':user}
 		return render(request, self.template_name, args)
@@ -133,20 +141,3 @@ class Data(LoginRequiredMixin,TemplateView):
 		 'result': result
 		}
 		return render(request, 'understand/data.html',args)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

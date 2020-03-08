@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from django.conf.urls import handler404, handler500
-from understand.views import register, login
+from understand.views import register, loginn
 from understand.views import Submit, Data
 
 admin.site.site_header = "Sammi"
@@ -30,7 +30,7 @@ admin.site.index_title = "Welcome to Sammi's Internal Portal"
 urlpatterns = [
     path('ahbjdkasjdk/Sammi/admin/uas9d', admin.site.urls),
     path('Sammi/Submit/',Submit.as_view(),name="SSubmit"),
-    path('',login,name="Login"),
+    path('',loginn,name="Login"),
     path('register/',register,name="RegisterS"),
     path('Sammi/Result/',Data.as_view(),name="DataS")
 ]

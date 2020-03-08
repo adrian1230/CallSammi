@@ -1,0 +1,65 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800">
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link rel="icon" href="{% static 'images/qwe.png'%}">
+    <title>{% block title %}Sammi{% endblock %}</title>
+</head>
+
+<body>
+    <div class="container">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+           <a href="{% url 'SSubmit' %}" class="navbar-item">
+            <img src="/static/images/qwe.png" alt="fav">
+          </a>
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarex">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        <div class="navbar-menu" id="navbarex">
+          <div class="navbar-end">
+            <a class="navbar-item" href="{%url 'SSubmit'%}">
+              Summon
+            </a>
+
+            <a class="navbar-item" href="{%url 'DataS' %}">
+              Data
+            </a>
+
+            <a class="navbar-item" href="{%url 'Login' %}">
+              Log Out
+            </a>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+          {% block content %} Here you are {% endblock %}
+      </div>
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <a href="mailto: adrian1145d98@gmail.com">Contact US at here</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $(".navbar-burger").click(function() {
+          $(".navbar-burger").toggleClass("is-active");
+          $(".navbar-menu").toggleClass("is-active");
+
+      });
+    });
+    </script>
+</body>
+
+</html>
