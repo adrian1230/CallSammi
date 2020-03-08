@@ -1,0 +1,15 @@
+{%block content%}
+<br>
+<div class="field">
+  <form method="post">
+    {% csrf_token %}
+    <div class="control">
+      {{ form.as_p }}
+    </div>
+    <br>
+    <a href="{%url 'Login' %}">
+      <input type="submit" value="Sign UP" class="button is-primary"></input>
+    </a>
+  </form>
+</div>
+{%endblock%}

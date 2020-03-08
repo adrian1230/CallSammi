@@ -68,7 +68,7 @@ def register(request, *args, **kwargs):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'created an account for {username}')
-            return redirect('home')
+            return redirect('Login')
     else:
         form = Register()
 
@@ -110,23 +110,28 @@ class Submit(LoginRequiredMixin,TemplateView):
 
 	def post(self,request):
 		form = TextSummary(request.POST)
+		title = ''
 		source = ''
 		original_text = ''
+		summarized_text = ''
 		category = ''
 		user = ''
 		if form.is_valid():
+			title = form.cleaned_data['title']
 			source = form.cleaned_data['source']
 			original_text = form.cleaned_data['original_text']
+			summarized_text = form.cleaned_data['summarized_text']
 			category = form.cleaned_data['category']
 			user = form.cleaned_data['user']
 			form.save()
 			return redirect('SSubmit')
-		args = {'form':form,'source':source,'original_text':original_text,
+		args = {
+		'title': title,
+        'form':form,'source':source,
+        'original_text':original_text,
+        'summarized_text':summarized_text,
 		'category':category,'user':user}
 		return render(request, self.template_name, args)
-
-# def home(request, *args, **kwargs):
-# 	return render(request,'understand/home.html',{})
 
 board_de = [login_required, never_cache]
 @method_decorator(board_de, name='dispatch')

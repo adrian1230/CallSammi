@@ -1,0 +1,15 @@
+{%block content %}
+	{% for d in result%}
+	<article class="message is-warning">
+	  <div class="message-header">
+	    <p>{{d.title}}</p>
+	  </div>
+	  <div class="message-body">
+	  	{{d.original_text}}
+	  </div>
+	  <div class="message-body">
+	  	{{d.summarized_text}}
+	  </div>
+	</article>
+	{%endfor%}
+{%endblock%}
