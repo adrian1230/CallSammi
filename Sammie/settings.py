@@ -25,7 +25,7 @@ SECRET_KEY = '0d7y+=s&!)w!@xw$gk1pbjq8h^n_(f7i2imvy)scd@ck8ql9j4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','https://sammieatwork.herokuapp.com/']
+ALLOWED_HOSTS = ['127.0.0.1','https://sammie.onrender.com/']
 
 LOGIN_URL = 'Login'
 LOGIN_REDIRECT_URL = 'SSubmit'
