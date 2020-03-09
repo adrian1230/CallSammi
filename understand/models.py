@@ -19,4 +19,4 @@ class Result(models.Model):
 	summarized_text = models.TextField(null=True, blank=True)
 	category = models.CharField(max_length=70, choices=categories)
 	user = models.CharField(max_length=100,null=True,blank=True)
-	date = models.DateTimeField(auto_now_add=True)
+	date = models.DateField(auto_now_add=True)

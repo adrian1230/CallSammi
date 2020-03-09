@@ -43,6 +43,7 @@ from django.template.loader import get_template
 from django.template import RequestContext, Context
 from django.http import HttpResponse, HttpResponseNotFound
 from django.http import HttpResponseServerError
+from understand.filters import ResultFilter
 
 users = User.objects.values_list('username')
 
@@ -141,8 +142,11 @@ class Data(LoginRequiredMixin,TemplateView):
 
 	def get(self,request):
 		result = Result.objects.all().order_by('-date')
-
+		result_filter = ResultFilter(request.GET, queryset=result)
+		search = result_filter.qs
 		args = {
-		 'result': result
+		 'result': result,
+		 'filter': result_filter,
+		 'search': search
 		}
 		return render(request, 'understand/data.html',args)

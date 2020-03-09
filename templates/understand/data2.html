@@ -1,15 +1,29 @@
 {%block content %}
-	{% for d in result%}
-	<article class="message is-warning">
-	  <div class="message-header">
-	    <p>{{d.title}}</p>
-	  </div>
-	  <div class="message-body">
-	  	{{d.original_text}}
-	  </div>
-	  <div class="message-body">
-	  	{{d.summarized_text}}
-	  </div>
-	</article>
-	{%endfor%}
+<div class="columns is-mobile">
+	<div class="column is-half is-offset-one-fifth">
+		<div class="field">
+			<form method="get">
+			   <div class="control">
+			   	 {{ filter.form }}
+			    <button type="submit" class="button is-danger is-small">
+			       Search
+			    </button>
+			   <div>
+	  	    </form>
+		</div>
+	</div>
+</div>
+{% for d in search%}
+		<article class="message is-warning">
+		  <div class="message-header">
+		    <p class="has-text-centered">{{d.title}}</p>
+		  </div>
+		  <div class="message-body">
+		  	<p>{{d.original_text}}</p>
+		  </div>
+		  <div class="message-body">
+		  	<p>{{d.summarized_text}}</p>
+		  </div>
+		</article>
+		{%endfor%}
 {%endblock%}
