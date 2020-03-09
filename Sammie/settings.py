@@ -25,7 +25,7 @@ SECRET_KEY = '0d7y+=s&!)w!@xw$gk1pbjq8h^n_(f7i2imvy)scd@ck8ql9j4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0','127.0.0.1:8000','https://sammieatwork.herokuapp.com/']
+ALLOWED_HOSTS = []
 
 LOGIN_URL = 'Login'
 LOGIN_REDIRECT_URL = 'SSubmit'
@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'understand',
     'django_filters',
-    'django_tables2',
 ]
 
 MIDDLEWARE = [
