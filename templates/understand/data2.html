@@ -16,7 +16,7 @@
 {% for d in search%}
 		<article class="message is-warning">
 		  <div class="message-header">
-		    <p class="has-text-centered">{{d.title}}</p>
+		  	<p class="has-text-centered">{{d.title}}</p>
 		  </div>
 		  <div class="message-body">
 		  	<p>{{d.original_text}}</p>
@@ -25,5 +25,5 @@
 		  	<p>{{d.summarized_text}}</p>
 		  </div>
 		</article>
-		{%endfor%}
+{%endfor%}
 {%endblock%}
