@@ -25,7 +25,7 @@ from understand.views import register, loginn
 from understand.views import Submit, Data
 
 admin.site.site_header = "Sammie"
-admin.site.index_title = "Welcome to Sammi's Internal Portal"
+admin.site.index_title = "Welcome to Sammie's Internal Portal"
 
 urlpatterns = [
     path('ahbjdkasjdk/Sammi/admin/uas9d', admin.site.urls),
