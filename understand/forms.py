@@ -14,8 +14,8 @@ class TextSummary(forms.ModelForm):
     source = forms.CharField(widget=forms.TextInput(attrs={'class': 'input','placeholder':'url or magazine name, etc.'}),required=False)
     original_text = forms.CharField(widget=forms.Textarea(attrs={'rows':7,'cols':10, 'class':'textarea'}))
     summarized_text = forms.CharField(widget=forms.HiddenInput(),required=False)
-    category = forms.CharField(widget=forms.Select(choices=categories,attrs={'class': 'select'}))
-    user = forms.CharField(widget=forms.TextInput(attrs={'class': 'input','placeholder':'your exact user name'}))
+    category = forms.CharField(widget=forms.Select(choices=categories,attrs={'class': 'select is-small'}))
+    user = forms.CharField(widget=forms.TextInput(attrs={'class': 'input','placeholder':'your exact user name'}),required=False)
 
     class Meta:
         model = Result

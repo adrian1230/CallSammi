@@ -13,8 +13,8 @@ categories = (
 )
 
 class Result(models.Model):
-	title = models.CharField(max_length=40, null=True,blank=True)
-	source = models.CharField(max_length=100, null=True, blank=True)
+	title = models.CharField(max_length=100, null=True,blank=True)
+	source = models.CharField(max_length=200, null=True, blank=True)
 	original_text = models.TextField()
 	summarized_text = models.TextField(null=True, blank=True)
 	category = models.CharField(max_length=70, choices=categories)

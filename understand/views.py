@@ -44,13 +44,16 @@ from django.template import RequestContext, Context
 from django.http import HttpResponse, HttpResponseNotFound
 from django.http import HttpResponseServerError
 from understand.filters import ResultFilter
+from summarizer import Summarizer
+
+model = Summarizer()
 
 users = User.objects.values_list('username')
 
-user = []
+userss = []
 
 for i in range(len(users)):
-    user.append(users[i][0])
+    userss.append(users[i][0])
 
 def error404(request, exception, template_name="understand/404.html"):
     response = render(request, 'understand/404.html', {})
@@ -100,7 +103,9 @@ def logout(request, *args, **kwargs):
         del request.session[key]
     return redirect('Login')
 
-board_de = [login_required, never_cache]
+classs = []
+
+board_de = [login_required(login_url=''), never_cache]
 @method_decorator(board_de, name='dispatch')
 class Submit(LoginRequiredMixin,TemplateView):
 	template_name = "understand/submit.html"
@@ -118,14 +123,24 @@ class Submit(LoginRequiredMixin,TemplateView):
 		category = ''
 		user = ''
 		if form.is_valid():
+			modifier = form.save(commit=False)
 			title = form.cleaned_data['title']
 			source = form.cleaned_data['source']
 			original_text = form.cleaned_data['original_text']
 			summarized_text = form.cleaned_data['summarized_text']
 			category = form.cleaned_data['category']
 			user = form.cleaned_data['user']
-			form.save()
-			return redirect('SSubmit')
+			modifier.summarized_text = model(modifier.original_text)
+			for i in userss:
+				if i != modifier.user:
+					classs.append(0)
+				else:
+					classs.append(1)
+			if sum(classs) != 1:
+				return HttpResponse("This user does not exist")
+			else:
+				modifier.save() 
+				return redirect('SSubmit')
 		args = {
 		'title': title,
         'form':form,'source':source,
@@ -134,7 +149,7 @@ class Submit(LoginRequiredMixin,TemplateView):
 		'category':category,'user':user}
 		return render(request, self.template_name, args)
 
-board_de = [login_required, never_cache]
+board_de = [login_required(login_url=''), never_cache]
 @method_decorator(board_de, name='dispatch')
 class Data(LoginRequiredMixin,TemplateView):
 	login_url = 'Login'
