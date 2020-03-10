@@ -9,6 +9,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import User, Group
 from django.urls import reverse_lazy
 from django import forms
+from django.views.decorators.cache import cache_control
 from django.contrib.auth.decorators import user_passes_test
 from django.views.generic import CreateView
 from understand.models import Result
@@ -113,7 +114,7 @@ def logout(request, *args, **kwargs):
 
 classs = []
 
-board_de = [login_required(login_url=''), never_cache]
+board_de = [login_required(login_url=''), never_cache,cache_control(no_cache=True, must_revalidate=True, no_store=True)]
 @method_decorator(board_de, name='dispatch')
 class Submit(LoginRequiredMixin,TemplateView):
 	template_name = "understand/submit.html"
@@ -160,7 +161,7 @@ class Submit(LoginRequiredMixin,TemplateView):
 		'category':category,'user':user}
 		return render(request, self.template_name, args)
 
-board_de = [login_required(login_url=''), never_cache]
+board_de = [login_required(login_url=''), never_cache,cache_control(no_cache=True, must_revalidate=True, no_store=True)]
 @method_decorator(board_de, name='dispatch')
 class Data(LoginRequiredMixin,TemplateView):
 	login_url = 'Login'
