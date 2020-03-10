@@ -44,12 +44,12 @@ from django.template import RequestContext, Context
 from django.http import HttpResponse, HttpResponseNotFound
 from django.http import HttpResponseServerError
 from understand.filters import ResultFilter
-from summarizer import Summarizer
+# from summarizer import Summarizer
 from pysummarization.nlpbase.auto_abstractor import AutoAbstractor
 from pysummarization.tokenizabledoc.simple_tokenizer import SimpleTokenizer
 from pysummarization.abstractabledoc.top_n_rank_abstractor import TopNRankAbstractor
 
-model = Summarizer()
+# model = Summarizer()
 
 auto_abstractor = AutoAbstractor()
 auto_abstractor.tokenizable_doc = SimpleTokenizer()
@@ -138,10 +138,10 @@ class Submit(LoginRequiredMixin,TemplateView):
 			summarized_text = form.cleaned_data['summarized_text']
 			category = form.cleaned_data['category']
 			user = form.cleaned_data['user']
-			modifier.summarized_text = model(modifier.original_text)
-			# result_dict = auto_abstractor.summarize(modifier.original_text, abstractable_doc)
-			# out = ''.join(' '.join(result_dict['summarize_result']).split('\n'))
-			# modifier.summarized_text = out
+			# modifier.summarized_text = model(modifier.original_text)
+			result_dict = auto_abstractor.summarize(modifier.original_text, abstractable_doc)
+			out = ''.join(' '.join(result_dict['summarize_result']).split('\n'))
+			modifier.summarized_text = out
 			for i in userss:
 				if i != modifier.user:
 					classs.append(0)
