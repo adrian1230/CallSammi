@@ -3,10 +3,10 @@
   <div class="tile is-vertical is-8">
     <div class="tile">
       <div class="tile is-parent is-vertical">
-        <article class="tile is-child notification is-primary">
+        <article class="tile is-child notification is-info">
           <h3 class="title">Sammie</h3>
           <br>
-          <h4 class="subtitle">This Website was Created by <a href="https://hk.linkedin.com/in/chun-cheong-so-12537917a" style="text-decoration: none;">Adrian</a></h4>
+          <h4 class="subtitle">This Website (only front- and back- end) was Created by <a href="https://hk.linkedin.com/in/chun-cheong-so-12537917a" style="text-decoration: none;">Adrian</a></h4>
           <h4 class="subtitle">Credit to pysummarization</h4>
         </article>
         <article class="tile is-child notification is-warning">
@@ -15,7 +15,7 @@
         </article>
       </div>
       <div class="tile is-parent">
-        <article class="tile is-child notification is-info">
+        <article class="tile is-child notification is-danger">
           <p class="title">Sammie Summarized</p>
           <p class="subtitle">First Prototype (English only) and how to use it by summarizing long articles</p>
           <div class="columns is-centered">
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="tile is-parent">
-      <article class="tile is-child notification is-danger">
+      <article class="tile is-child notification is-success">
         <a href="mailto: adrian1145d98@gmail.com" style="text-decoration: none;">
           <p class="title">Contact US</p>
           <p class="subtitle">We are your faithful assistant</p>
@@ -36,30 +36,19 @@
     </div>
   </div>
   <div class="tile is-parent">
-    <article class="tile is-child notification is-success">
+    <article class="tile is-child notification is-primary">
       <div class="content">
-        <p class="title">Come and Call</p>
-        <p class="subtitle">Login here:</p>
-        <div class="content">
-          <div class="field">
-            <form method="post">
-              {% csrf_token %}
-              <label class="label" for="username">Username:</label>
-              <div class="control">
-                <input type="text" name="username" class="input" placeholder="Username"><br>
-              </div>
-              <label class="label" for="password">Password:</label>
-              <div class="control">
-                <input type="password" name="password" class="input" placeholder="Password">
-              </div>
-              <br>
-              <input type="submit" value="Log In" class="button is-link"></input>
-            </form>
-          </div>
-          <h3>If you have not registered, then, what are you waiting for!</h3>
-          <h4>
-            <a href="{%url 'RegisterS' %}" class="button" style="text-decoration: none;">Come and Register here!</a>
-          </h4>
+        <div class="field">
+          <form method="post">
+            {% csrf_token %}
+            <div class="control">
+              {{ form.as_p }}
+            </div>
+            <br>
+            <a href="{%url 'SSubmit' %}" style="text-decoration: none;">
+              <input type="submit" value="Summarize" class="button is-danger"></input>
+            </a>
+          </form>
         </div>
       </div>
     </article>

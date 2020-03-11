@@ -27,9 +27,9 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','https://sammie.onrender.com/']
 
-LOGIN_URL = 'Login'
-LOGIN_REDIRECT_URL = 'SSubmit'
-LOGOUT_REDIRECT_URL = 'Login'
+# LOGIN_URL = 'Login'
+# LOGIN_REDIRECT_URL = 'SSubmit'
+# LOGOUT_REDIRECT_URL = 'Login'
 
 # Application definition
 
@@ -49,13 +49,13 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'Sammie.urls'
 

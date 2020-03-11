@@ -16,7 +16,8 @@ from understand.models import Result
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
-from understand.forms import TextSummary, Register
+from understand.forms import TextSummary
+# , Register
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
@@ -57,12 +58,12 @@ auto_abstractor.tokenizable_doc = SimpleTokenizer()
 auto_abstractor.delimiter_list = [".", "\n"]
 abstractable_doc = TopNRankAbstractor()
 
-users = User.objects.values_list('username')
+# users = User.objects.values_list('username')
 
-userss = []
+# userss = []
 
-for i in range(len(users)):
-    userss.append(users[i][0])
+# for i in range(len(users)):
+#     userss.append(users[i][0])
 
 def error404(request, exception, template_name="understand/404.html"):
     response = render(request, 'understand/404.html', {})
@@ -74,50 +75,50 @@ def error500(request, template_name="understand/500.html"):
     response.status_code = 500
     return response
 
-def register(request, *args, **kwargs):
-    if request.method == 'POST':
-        form = Register(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'created an account for {username}')
-            return redirect('Login')
-    else:
-        form = Register()
+# def register(request, *args, **kwargs):
+#     if request.method == 'POST':
+#         form = Register(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             username = form.cleaned_data.get('username')
+#             messages.success(request, f'created an account for {username}')
+#             return redirect('Login')
+#     else:
+#         form = Register()
 
-    return render(request, 'understand/register.html', context={'form': form})
+#     return render(request, 'understand/register.html', context={'form': form})
 
-def loginn(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
-        if user:
-            if user.is_active:
-                login(request,user)
-                return redirect('SSubmit')
-            else:
-                return HttpResponse("Your account was inactive.")
-        else:
-            print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username,password))
-            return HttpResponse("Invalid login details given")
-    else:
-        return render(request, 'understand/login.html', {})
+# def loginn(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         user = authenticate(username=username, password=password)
+#         if user:
+#             if user.is_active:
+#                 login(request,user)
+#                 return redirect('SSubmit')
+#             else:
+#                 return HttpResponse("Your account was inactive.")
+#         else:
+#             print("Someone tried to login and failed.")
+#             print("They used username: {} and password: {}".format(username,password))
+#             return HttpResponse("Invalid login details given")
+#     else:
+#         return render(request, 'understand/login.html', {})
 
-@method_decorator(login_required, name='dispatch')
-def logout(request, *args, **kwargs):
-    auth.logout(request)
-    for key in request.session.keys():
-        del request.session[key]
-    return redirect('Login')
+# @method_decorator(login_required, name='dispatch')
+# def logout(request, *args, **kwargs):
+#     auth.logout(request)
+#     for key in request.session.keys():
+#         del request.session[key]
+#     return redirect('Login')
 
 classs = []
 
-board_de = [login_required(login_url=''), never_cache,cache_control(no_cache=True, must_revalidate=True, no_store=True)]
-@method_decorator(board_de, name='dispatch')
-class Submit(LoginRequiredMixin,TemplateView):
-	template_name = "understand/submit.html"
+# board_de = [login_required(login_url=''), never_cache,cache_control(no_cache=True, must_revalidate=True, no_store=True)]
+# @method_decorator(board_de, name='dispatch')
+class Submit(TemplateView):
+	template_name = "understand/login.html"
 
 	def get(self, request):
 		form = TextSummary()
@@ -130,7 +131,7 @@ class Submit(LoginRequiredMixin,TemplateView):
 		original_text = ''
 		summarized_text = ''
 		category = ''
-		user = ''
+		# user = ''
 		if form.is_valid():
 			modifier = form.save(commit=False)
 			title = form.cleaned_data['title']
@@ -138,34 +139,38 @@ class Submit(LoginRequiredMixin,TemplateView):
 			original_text = form.cleaned_data['original_text']
 			summarized_text = form.cleaned_data['summarized_text']
 			category = form.cleaned_data['category']
-			user = form.cleaned_data['user']
+			# user = form.cleaned_data['user']
 			# modifier.summarized_text = model(modifier.original_text)
 			result_dict = auto_abstractor.summarize(modifier.original_text, abstractable_doc)
 			out = ''.join(' '.join(result_dict['summarize_result']).split('\n'))
 			modifier.summarized_text = out
-			for i in userss:
-				if i != modifier.user:
-					classs.append(0)
-				else:
-					classs.append(1)
-			if sum(classs) != 1:
-				return HttpResponse("This user does not exist")
-			else:
-				modifier.save() 
-				return redirect('SSubmit')
+			# for i in userss:
+			# 	if i != modifier.user:
+			# 		classs.append(0)
+			# 	else:
+			# 		classs.append(1)
+			# if sum(classs) != 1:
+			# 	return HttpResponse("This user does not exist")
+			# else:
+			# 	modifier.save() 
+			# 	return redirect('SSubmit')
+			modifier.save()
+			return redirect('SSubmit')
 		args = {
 		'title': title,
         'form':form,'source':source,
         'original_text':original_text,
         'summarized_text':summarized_text,
-		'category':category,'user':user}
+		'category':category,
+		# 'user':user
+		}
 		return render(request, self.template_name, args)
 
-board_de = [login_required(login_url=''), never_cache,cache_control(no_cache=True, must_revalidate=True, no_store=True)]
-@method_decorator(board_de, name='dispatch')
-class Data(LoginRequiredMixin,TemplateView):
-	login_url = 'Login'
-	redirect_field_name = 'DataS'
+# board_de = [login_required(login_url=''), never_cache,cache_control(no_cache=True, must_revalidate=True, no_store=True)]
+# @method_decorator(board_de, name='dispatch')
+class Data(TemplateView):
+	# login_url = 'Login'
+	# redirect_field_name = 'DataS'
 
 	def get(self,request):
 		result = Result.objects.all().order_by('-date')
