@@ -1,8 +1,0 @@
-release: python manage.py migrate
-web: gunicorn Sammie.wsgi:application --log-file - --log-level debug
-python manage.py collectstatic --noinput
-manage.py migrate 
-web: python Sammie/manage.py runserver 0.0.0.0:$PORT
-web: gunicorn pp:app
-web: gunicorn --worker-class eventlet -w 1 app:app
-web: gunicorn --bind 0.0.0.0:$PORT Sammie.wsgi
